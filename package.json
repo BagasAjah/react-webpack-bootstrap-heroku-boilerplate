@@ -4,7 +4,7 @@
   "description": "Sneat backoffice",
   "engines": {
     "iojs": "2.5.0"
-  }
+  },
   "scripts": {
     "build": "webpack --progress --profile --colors",
     "dev": "webpack-dev-server --progress --profile --colors --hot --config webpack.dev.config.js",
