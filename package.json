@@ -9,13 +9,15 @@
     "start": "node server/index.js"
   },
   "dependencies": {
-    "react": "^0.13.3",
-    "parse": "^1.4.0",
-    "parse-react": "^0.4.2",
+    "bootstrap": "^3.3.5",
     "compression": "^1.5.0",
     "cors": "^2.7.1",
     "express": "^4.12.4",
-    "webpack": "^1.9.11"
+    "parse": "^1.4.0",
+    "parse-react": "^0.4.2",
+    "react": "^0.13.3",
+    "webpack": "^1.9.11",
+    "babel-loader": "^5.1.4",
   },
   "devDependencies": {
     "babel-core": "^5.5.8",
