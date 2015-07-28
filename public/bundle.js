@@ -54,7 +54,7 @@
 /******/ 	
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "f7043cefc32e1e4551e3"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "621f32a1cc124a3d5ae9"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
 /******/ 	
@@ -90,6 +90,7 @@
 /******/ 				} finally {
 /******/ 					finishChunkLoading();
 /******/ 				}
+/******/ 	
 /******/ 				function finishChunkLoading() {
 /******/ 					hotChunksLoading--;
 /******/ 					if(hotStatus === "prepare") {
@@ -122,18 +123,20 @@
 /******/ 					hot._selfAccepted = true;
 /******/ 				else if(typeof dep === "function")
 /******/ 					hot._selfAccepted = dep;
-/******/ 				else if(typeof dep === "number")
+/******/ 				else if(typeof dep === "object")
+/******/ 					for(var i = 0; i < dep.length; i++)
+/******/ 						hot._acceptedDependencies[dep[i]] = callback;
+/******/ 				else
 /******/ 					hot._acceptedDependencies[dep] = callback;
-/******/ 				else for(var i = 0; i < dep.length; i++)
-/******/ 					hot._acceptedDependencies[dep[i]] = callback;
 /******/ 			},
 /******/ 			decline: function(dep) {
 /******/ 				if(typeof dep === "undefined")
 /******/ 					hot._selfDeclined = true;
 /******/ 				else if(typeof dep === "number")
 /******/ 					hot._declinedDependencies[dep] = true;
-/******/ 				else for(var i = 0; i < dep.length; i++)
-/******/ 					hot._declinedDependencies[dep[i]] = true;
+/******/ 				else
+/******/ 					for(var i = 0; i < dep.length; i++)
+/******/ 						hot._declinedDependencies[dep[i]] = true;
 /******/ 			},
 /******/ 			dispose: function(callback) {
 /******/ 				hot._disposeHandlers.push(callback);
@@ -187,6 +190,11 @@
 /******/ 	// The update info
 /******/ 	var hotUpdate, hotUpdateNewHash;
 /******/ 	
+/******/ 	function toModuleId(id) {
+/******/ 		var isNumber = (+id) + "" === id;
+/******/ 		return isNumber ? +id : id;
+/******/ 	}
+/******/ 	
 /******/ 	function hotCheck(apply, callback) {
 /******/ 		if(hotStatus !== "idle") throw new Error("check() is only allowed in idle status");
 /******/ 		if(typeof apply === "function") {
@@ -194,7 +202,9 @@
 /******/ 			callback = apply;
 /******/ 		} else {
 /******/ 			hotApplyOnUpdate = apply;
-/******/ 			callback = callback || function(err) { if(err) throw err; };
+/******/ 			callback = callback || function(err) {
+/******/ 				if(err) throw err;
+/******/ 			};
 /******/ 		}
 /******/ 		hotSetStatus("check");
 /******/ 		hotDownloadManifest(function(err, update) {
@@ -215,7 +225,8 @@
 /******/ 			hotSetStatus("prepare");
 /******/ 			hotCallback = callback;
 /******/ 			hotUpdate = {};
-/******/ 			var chunkId = 0; { // eslint-disable-line no-lone-blocks
+/******/ 			var chunkId = 0;
+/******/ 			{ // eslint-disable-line no-lone-blocks
 /******/ 				/*globals chunkId */
 /******/ 				hotEnsureUpdateChunk(chunkId);
 /******/ 			}
@@ -260,7 +271,7 @@
 /******/ 			var outdatedModules = [];
 /******/ 			for(var id in hotUpdate) {
 /******/ 				if(Object.prototype.hasOwnProperty.call(hotUpdate, id)) {
-/******/ 					outdatedModules.push(+id);
+/******/ 					outdatedModules.push(toModuleId(id));
 /******/ 				}
 /******/ 			}
 /******/ 			callback(null, outdatedModules);
@@ -273,10 +284,14 @@
 /******/ 			callback = options;
 /******/ 			options = {};
 /******/ 		} else if(options && typeof options === "object") {
-/******/ 			callback = callback || function(err) { if(err) throw err; };
+/******/ 			callback = callback || function(err) {
+/******/ 				if(err) throw err;
+/******/ 			};
 /******/ 		} else {
 /******/ 			options = {};
-/******/ 			callback = callback || function(err) { if(err) throw err; };
+/******/ 			callback = callback || function(err) {
+/******/ 				if(err) throw err;
+/******/ 			};
 /******/ 		}
 /******/ 	
 /******/ 		function getAffectedStuff(module) {
@@ -316,6 +331,7 @@
 /******/ 	
 /******/ 			return [outdatedModules, outdatedDependencies];
 /******/ 		}
+/******/ 	
 /******/ 		function addAllToSet(a, b) {
 /******/ 			for(var i = 0; i < b.length; i++) {
 /******/ 				var item = b[i];
@@ -331,7 +347,7 @@
 /******/ 		var appliedUpdate = {};
 /******/ 		for(var id in hotUpdate) {
 /******/ 			if(Object.prototype.hasOwnProperty.call(hotUpdate, id)) {
-/******/ 				var moduleId = +id;
+/******/ 				var moduleId = toModuleId(id);
 /******/ 				var result = getAffectedStuff(moduleId);
 /******/ 				if(!result) {
 /******/ 					if(options.ignoreUnaccepted)
@@ -544,7 +560,7 @@
 	/* WEBPACK VAR INJECTION */(function(__resourceQuery) {var io = __webpack_require__(2);
 	var stripAnsi = __webpack_require__(54);
 	var scriptElements = document.getElementsByTagName("script");
-	io = io.connect(true ?
+	io = io.connect( true ?
 		__resourceQuery.substr(1) :
 		scriptElements[scriptElements.length-1].getAttribute("src").replace(/\/[^\/]+$/, "")
 	);
@@ -7866,7 +7882,10 @@
 		var check = function check() {
 			module.hot.check(function(err, updatedModules) {
 				if(err) {
-					if(module.hot.status() in {abort: 1, fail: 1}) {
+					if(module.hot.status() in {
+							abort: 1,
+							fail: 1
+						}) {
 						console.warn("[HMR] Cannot check for update. Need to do a full reload!");
 						console.warn("[HMR] " + err.stack || err.message);
 					} else {
@@ -7885,7 +7904,10 @@
 					ignoreUnaccepted: true
 				}, function(err, renewedModules) {
 					if(err) {
-						if(module.hot.status() in {abort: 1, fail: 1}) {
+						if(module.hot.status() in {
+								abort: 1,
+								fail: 1
+							}) {
 							console.warn("[HMR] Cannot apply update. Need to do a full reload!");
 							console.warn("[HMR] " + err.stack || err.message);
 						} else {
@@ -7908,7 +7930,7 @@
 		};
 		var addEventListener = window.addEventListener ? function(eventName, listener) {
 			window.addEventListener(eventName, listener, false);
-		} : function (eventName, listener) {
+		} : function(eventName, listener) {
 			window.attachEvent("on" + eventName, listener);
 		};
 		addEventListener("message", function(event) {
@@ -7971,26 +7993,26 @@
 	
 	var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
 	
+	var _get = function get(_x, _x2, _x3) { var _again = true; _function: while (_again) { var object = _x, property = _x2, receiver = _x3; desc = parent = getter = undefined; _again = false; if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { _x = parent; _x2 = property; _x3 = receiver; _again = true; continue _function; } } else if ("value" in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } } };
+	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 	
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 	
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) subClass.__proto__ = superClass; }
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 	
 	var _react = __webpack_require__(115);
 	
 	var _react2 = _interopRequireDefault(_react);
 	
 	var App = (function (_React$Component) {
+		_inherits(App, _React$Component);
+	
 		function App() {
 			_classCallCheck(this, App);
 	
-			if (_React$Component != null) {
-				_React$Component.apply(this, arguments);
-			}
+			_get(Object.getPrototypeOf(App.prototype), "constructor", this).apply(this, arguments);
 		}
-	
-		_inherits(App, _React$Component);
 	
 		_createClass(App, [{
 			key: "render",
@@ -7998,7 +8020,7 @@
 				return _react2["default"].createElement(
 					"div",
 					null,
-					"My simple Reacta Webpack Babel App"
+					"A simple React Webpack Babel App"
 				);
 			}
 		}]);
