@@ -5,29 +5,22 @@
   "main": "''",
   "scripts": {
     "build": "webpack --progress --profile --colors",
-    "dev": "webpack-dev-server --progress --profile --colors --hot"
+    "dev": "webpack-dev-server --progress --profile --colors --hot",
+    "start": "node server/index.js"
   },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/alicoding/react-webpack-babel"
-  },
-  "keywords": [
-    "React",
-    "Webpack",
-    "Babel",
-    "Starter",
-    "template"
-  ],
   "dependencies": {
     "react": "^0.13.3",
     "parse": "^1.4.0",
     "parse-react": "^0.4.2",
-    "webpack": "^1.9.11"
+    "compression": "^1.5.0",
+    "cors": "^2.7.1",
+    "express": "^4.12.4"
   },
   "devDependencies": {
     "babel-core": "^5.5.8",
     "babel-loader": "^5.1.4",
     "react-hot-loader": "^1.2.7",
-    "webpack-dev-server": "^1.9.0"
+    "webpack-dev-server": "^1.9.0",
+    "webpack": "^1.9.11"
   }
 }
