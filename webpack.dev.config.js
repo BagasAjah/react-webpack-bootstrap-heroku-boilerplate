@@ -9,21 +9,23 @@ module.exports = {
   ],
   devtool: process.env.WEBPACK_DEVTOOL || 'source-map',
   output: {
-    path: path.join(__dirname, 'public'),
+    path: path.join(__dirname, 'client'),
     filename: 'bundle.js'
   },
   resolve: {
     extensions: ['', '.js', '.jsx']
   },
   module: {
-    loaders: [{
-      test: /\.jsx?$/,
-      exclude: /(node_modules|bower_components)/,
-      loaders: ['react-hot', 'babel'],
-    }]
+    loaders: [
+    {test: /\.jsx?$/, exclude: /(node_modules|bower_components)/, loaders: ['react-hot', 'babel']},
+    {test: /\.less$/,loader: 'style!css!less'},
+    {test: /\.css$/,loader: 'style!css'},
+    { test: /\.woff(2)?$/, loader: "url-loader" },
+    { test: /\.(ttf|eot|svg)?$/, loader: "file-loader" }
+    ]
   },
   devServer: {
-      contentBase: "./public",
+      contentBase: "./client",
       noInfo: true, //  --no-info option
       hot: true,
       inline: true

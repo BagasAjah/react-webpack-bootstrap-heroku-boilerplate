@@ -12,11 +12,10 @@ module.exports = {
     extensions: ['', '.js', '.jsx']
   },
   module: {
-    loaders: [{
-      test: /\.jsx?$/,
-      exclude: /(node_modules|bower_components)/,
-      loaders: ['babel'],
-    }]
+    loaders: [
+    {test: /\.jsx?$/,exclude: /(node_modules|bower_components)/,loaders: ['babel']},
+    {test: /\.less$/,loader: "style!css!less"}
+    ]
   },
   plugins: [
     new webpack.optimize.UglifyJsPlugin({minimize: true})

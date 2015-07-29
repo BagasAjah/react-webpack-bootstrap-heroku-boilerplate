@@ -11,15 +11,21 @@
     "start": "node server/index.js"
   },
   "dependencies": {
+    "babel-loader": "^5.1.4",
     "bootstrap": "^3.3.5",
     "compression": "^1.5.0",
     "cors": "^2.7.1",
+    "css-loader": "^0.15.6",
     "express": "^4.12.4",
+    "file-loader": "^0.8.4",
+    "less": "^2.5.1",
+    "less-loader": "^2.2.0",
     "parse": "^1.4.0",
     "parse-react": "^0.4.2",
     "react": "^0.13.3",
-    "webpack": "^1.9.11",
-    "babel-loader": "^5.1.4"
+    "style-loader": "^0.12.3",
+    "url-loader": "^0.5.6",
+    "webpack": "^1.9.11"
   },
   "devDependencies": {
     "babel-core": "^5.5.8",
