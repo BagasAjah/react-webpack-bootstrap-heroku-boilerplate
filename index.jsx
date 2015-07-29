@@ -1,5 +1,5 @@
 import React from 'react';
-import bootswatch from './index.less';
+import bootswatch from './client/index.less';
 
 export class App extends React.Component {
   render() {
