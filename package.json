@@ -1,37 +1,34 @@
 {
   "name": "sneat-backoffice",
   "version": "0.0.1",
-  "description": "Sneat backoffice",
   "engines": {
     "iojs": "2.5.0"
   },
-  "scripts": {
-    "build": "webpack --progress --profile --colors",
-    "dev": "webpack-dev-server --progress --profile --colors --hot --config webpack.dev.config.js",
-    "start": "node server.js"
-  },
+  "description": "Sneat backoffice",
   "dependencies": {
-    "bootstrap": "^3.3.5",
-    "bootswatch": "^3.3.5",
-    "compression": "^1.5.0",
-    "express": "^4.12.4",
-    "parse": "^1.4.0",
-    "parse-react": "^0.4.2",
     "react": "^0.13.3",
+    "bootstrap": "^3.3.5",
+    "compression": "^1.5.0",
+    "file-loader": "^0.8.4",
+    "less": "^2.5.1",
+    "css-loader": "^0.15.6",
+    "express": "^4.12.4",
+    "style-loader": "^0.12.3",
+    "url-loader": "^0.5.6",
+    "parse": "^1.4.0",
     "react-router": "^0.13.3",
-    "webpack": "^1.9.11"
-  },
-  "devDependencies": {
-    "babel-loader": "^5.1.4",
-    "babel-core": "^5.5.8",
+    "webpack": "^1.9.11",
     "babel-loader": "^5.1.4",
     "react-hot-loader": "^1.2.7",
-    "style-loader": "^0.12.3",
-    "webpack-dev-server": "^1.9.0",
-    "file-loader": "^0.8.4",
     "less-loader": "^2.2.0",
-    "less": "^2.5.1",
-    "url-loader": "^0.5.6",
-    "css-loader": "^0.15.6"
+    "parse-react": "^0.4.2",
+    "babel-core": "^5.5.8",
+    "webpack-dev-server": "^1.9.0",
+    "bootswatch": "^3.3.5"
+  },
+  "scripts": {
+    "start": "node server.js",
+    "build": "webpack --progress --profile --colors",
+    "dev": "webpack-dev-server --progress --profile --colors --hot --config webpack.dev.config.js"
   }
 }
