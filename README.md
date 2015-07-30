@@ -5,7 +5,6 @@
 * React
 * Babel
 * Webpack
-* Parse
 * iojs
 * heroku-buildpack-webpack
 
