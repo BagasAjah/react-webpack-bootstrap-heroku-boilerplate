@@ -1,9 +1,11 @@
 # Sneat backoffice
 
+### Stack
+
 * React
 * Webpack
 * Babel
-
+* Parse
 
 ### To run
 

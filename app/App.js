@@ -1,7 +1,7 @@
 import React from 'react';
-import bootswatch from './client/index.less';
+import bootswatch from './styles/index.less';
 
-export class App extends React.Component {
+export class SneatApp extends React.Component {
   render() {
     return (
       <form className="form-horizontal">
@@ -19,4 +19,4 @@ export class App extends React.Component {
 	}
 }
 
-React.render(<App/>, document.querySelector("#myApp"));
+React.render(<SneatApp/>, document.querySelector("#app"));

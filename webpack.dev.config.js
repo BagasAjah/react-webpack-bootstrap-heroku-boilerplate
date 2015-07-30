@@ -3,17 +3,13 @@ var path = require('path');
 
 module.exports = {
     entry: [
-        'webpack-dev-server/client?http://0.0.0.0:8080', // WebpackDevServer host and port
+        'webpack-dev-server/client?http://0.0.0.0:8080',
         'webpack/hot/only-dev-server',
-        './index.jsx' // Your appʼs entry point
+        './app/App.js'
     ],
-    devtool: process.env.WEBPACK_DEVTOOL || 'source-map',
     output: {
-        path: path.join(__dirname, 'client'),
+        path: path.join(__dirname, 'public'),
         filename: 'bundle.js'
-    },
-    resolve: {
-        extensions: ['', '.js', '.jsx', '.less']
     },
     module: {
         loaders: [{
@@ -35,8 +31,8 @@ module.exports = {
         }]
     },
     devServer: {
-        contentBase: "./client",
-        noInfo: true, //  --no-info option
+        contentBase: "./public",
+        noInfo: true,
         hot: true,
         inline: true
     },

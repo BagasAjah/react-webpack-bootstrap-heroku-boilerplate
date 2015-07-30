@@ -2,11 +2,10 @@ var webpack = require('webpack');
 var path = require('path');
 
 module.exports = {
-    entry: './index.jsx',
-    devtool: 'source-map',
+    entry: './app/App.js',
     output: {
-        path: path.join(__dirname, 'dist'),
-        filename: 'bundle.min.js'
+        path: path.join(__dirname, 'public'),
+        filename: 'bundle.js'
     },
     resolve: {
         extensions: ['', '.js', '.jsx', '.less']
