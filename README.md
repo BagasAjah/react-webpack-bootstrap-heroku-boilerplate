@@ -9,26 +9,22 @@
 * iojs
 * heroku-buildpack-webpack
 
-### To run
-
-You can simply run webpack build using this command:
-
+### Build
 ```
-> $ npm run build
+npm run build
 ```
 
-If you want to run with webpack-dev-server simply run this command:
-
+### Dev
 ```
-> $ npm run dev
+npm run dev
 ```
 
 ### Heroku
-
-* heroku create
-* heroku config:set BUILDPACK_URL=https://github.com/ddollar/heroku-buildpack-multi
-* git push heroku master
-
+```
+heroku create
+heroku config:set BUILDPACK_URL=https://github.com/ddollar/heroku-buildpack-multi
+git push heroku master
+```
 
 ### Inspirations
 
