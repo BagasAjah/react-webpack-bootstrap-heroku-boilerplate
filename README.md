@@ -6,7 +6,6 @@
 * Webpack
 * Babel
 * Parse
-* iojs
 
 ### To run
 
