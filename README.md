@@ -21,3 +21,9 @@ If you want to run with webpack-dev-server simply run this command:
 ```
 > $ npm run dev
 ```
+
+### Heroku
+
+* heroku create
+* heroku config:set BUILDPACK_URL=https://github.com/ddollar/heroku-buildpack-multi
+* git push heroku master
