@@ -1,5 +1,5 @@
 {
-  "name": "https://github.com/xcarpentier/react-webpack-bootstrap-heroku-boilerplate",
+  "name": "react-webpack-bootstrap-heroku-boilerplate",
   "description": "React Webpack Bootstrap Heroku Boilerplate",
   "version": "0.0.1",
   "main": "app/App.js",
