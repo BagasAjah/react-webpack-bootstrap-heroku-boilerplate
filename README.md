@@ -1,4 +1,4 @@
-# Sneat backoffice
+# React Webpack Bootstrap Heroku Boilerplate
 
 ### Stack
 
@@ -6,6 +6,7 @@
 * Webpack
 * Babel
 * Parse
+* iojs
 
 ### To run
 

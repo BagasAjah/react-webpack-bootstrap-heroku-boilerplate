@@ -1,10 +1,26 @@
 {
-  "name": "sneat-backoffice",
+  "name": "https://github.com/xcarpentier/react-webpack-bootstrap-heroku-boilerplate",
+  "description": "React Webpack Bootstrap Heroku Boilerplate",
   "version": "0.0.1",
+  "main": "app/App.js",
   "engines": {
     "iojs": "2.5.0"
   },
-  "description": "Sneat backoffice",
+  "scripts": {
+    "start": "node server.js",
+    "build": "webpack --progress --profile --colors",
+    "dev": "webpack-dev-server --progress --profile --colors --hot --config webpack.dev.config.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/xcarpentier/react-webpack-bootstrap-heroku-boilerplate"
+  },
+  "bugs": {
+    "url": "https://github.com/xcarpentier/react-webpack-bootstrap-heroku-boilerplate/issues"
+  },
+  "homepage": "https://github.com/xcarpentier/react-webpack-bootstrap-heroku-boilerplate",
+  "author": "Xavier Carpentier <xcapetir@gmail.com> (http://xaviercarpentier.com)",
   "dependencies": {
     "react": "^0.13.3",
     "bootstrap": "^3.3.5",
@@ -23,12 +39,6 @@
     "less-loader": "^2.2.0",
     "parse-react": "^0.4.2",
     "babel-core": "^5.5.8",
-    "webpack-dev-server": "^1.9.0",
-    "bootswatch": "^3.3.5"
-  },
-  "scripts": {
-    "start": "node server.js",
-    "build": "webpack --progress --profile --colors",
-    "dev": "webpack-dev-server --progress --profile --colors --hot --config webpack.dev.config.js"
+    "webpack-dev-server": "^1.9.0"
   }
 }

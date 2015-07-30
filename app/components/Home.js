@@ -4,7 +4,7 @@ class Home extends React.Component{
   render(){
     return (
       <h2 className="text-center">
-        SNEAT Backoffice
+        React Webpack Bootstrap Heroku Boilerplate
       </h2>
     )
   }
